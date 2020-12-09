@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import OktaSignInWidget from './OktaSignInWidget';
 import { withOktaAuth } from '@okta/okta-react';
+import particlesJS from './utils/particles.js';
+import './login.scss';
 
 export default withOktaAuth(class Login extends Component {
   constructor(props) {
     super(props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onError = this.onError.bind(this);
+  }
+
+  componentDidMount(){
+    particlesJS('ipx-branding__particles')
   }
 
   onSuccess(res) {
@@ -29,9 +35,13 @@ export default withOktaAuth(class Login extends Component {
   render() {
     return this.props.authState.isAuthenticated ?
       <Redirect to={{ pathname: '/' }}/> :
-      <OktaSignInWidget
-        baseUrl={this.props.baseUrl}
-        onSuccess={this.onSuccess}
-        onError={this.onError}/>;
+      <div id="ipx-branding__particles" >
+        <div className="inner">
+          <OktaSignInWidget
+            baseUrl={this.props.baseUrl}
+            onSuccess={this.onSuccess}
+            onError={this.onError}/>
+        </div>
+      </div>;
   }
 });

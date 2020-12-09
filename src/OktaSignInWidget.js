@@ -26,6 +26,6 @@ export default class OktaSignInWidget extends Component {
   }
 
   render() {
-    return <div ref={this.wrapper} className="hi" >{this.props.children}</div>;
+    return <div ref={this.wrapper}>{this.props.children}</div>;
   }
 };
